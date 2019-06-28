@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,9 +38,13 @@ public class InicioFragment extends Fragment implements OnMapReadyCallback {
     private Activity activity;
     private MapView mapView;
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
 
         Mapbox.getInstance(requireActivity(), "pk.eyJ1IjoiYzNyYmVydXNzIiwiYSI6ImNqeGJmdzN3aDA0dnMzem1tOTQzd20yZGEifQ.LKXwC9gJiLNCvBMR7Su4Jg");
 
@@ -50,6 +56,8 @@ public class InicioFragment extends Fragment implements OnMapReadyCallback {
 
 
         return view;
+
+
     }
 
 
