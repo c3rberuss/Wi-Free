@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.c3rberuss.wi_free.MainActivity;
 import com.c3rberuss.wi_free.R;
 
 public class Perfil extends AppCompatActivity {
@@ -12,6 +13,13 @@ public class Perfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
+        findViewById(R.id.btnSalir).setOnClickListener(v->{
+
+            MainActivity.mAuth.signOut();
+            this.finish();
+
+        });
 
     }
 

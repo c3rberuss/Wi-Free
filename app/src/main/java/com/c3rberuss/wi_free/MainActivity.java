@@ -19,6 +19,7 @@ import com.c3rberuss.wi_free.fragments.InicioFragment;
 import com.c3rberuss.wi_free.fragments.WifiFragment;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.ui.idp.AuthMethodPickerActivity;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,7 +37,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private FirebaseFirestoreSettings settings;
     private static final int RC_SIGN_IN = 123;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     private  List<AuthUI.IdpConfig> providers = Arrays.asList(
             new AuthUI.IdpConfig.EmailBuilder().build(),
-            new AuthUI.IdpConfig.PhoneBuilder().build(),
             new AuthUI.IdpConfig.FacebookBuilder().build());
 
 
@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(providers)
+                                    .setLogo(R.drawable.ic_wifi)
                                     .build(),
                             RC_SIGN_IN);
 
