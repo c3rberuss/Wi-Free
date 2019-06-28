@@ -30,7 +30,7 @@
                 app:layout_constraintHorizontal_bias="0.325"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_wifi" />
+                app:srcCompat="@drawable/ic_logoapp" />
 
             <TextView
                 android:id="@+id/textView2"
