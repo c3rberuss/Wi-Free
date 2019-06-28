@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1060055770844",
+    "firebase_url": "https://wifree-1f0b5.firebaseio.com",
+    "project_id": "wifree-1f0b5",
+    "storage_bucket": "wifree-1f0b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060055770844:android:d759a05c12ee37db",
+        "android_client_info": {
+          "package_name": "com.c3rberuss.wi_free"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060055770844-6i34tvrvq92cdjn7j7t7kmav2udq61p2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.c3rberuss.wi_free",
+            "certificate_hash": "544b02f977343e24b17d8a907a4cb804cdc8578c"
+          }
+        },
+        {
+          "client_id": "1060055770844-biu9t2vargmloi7rghlsrl6o5ej6a1p8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPbXN5MA0TnDpiEJA2VK6mvyxWYfOQ-3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060055770844-biu9t2vargmloi7rghlsrl6o5ej6a1p8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
