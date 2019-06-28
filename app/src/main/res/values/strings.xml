@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Wi-Free</string>
+
+
+    <string name="facebook_application_id" translatable="false">378208076163116</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb378208076163116</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD44Io5TtO4RHFW_0FIU6ii1xJ_lt29dyc</string>
+
 </resources>

@@ -12,7 +12,11 @@ import android.view.MenuItem;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
+import com.c3rberuss.wi_free.activities.Perfil;
+import com.c3rberuss.wi_free.fragments.InicioFragment;
+import com.c3rberuss.wi_free.fragments.WifiFragment;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
@@ -37,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestoreSettings settings;
     private static final int RC_SIGN_IN = 123;
     private FirebaseUser user;
+    private Menu menu;
+    private InicioFragment inicioFragment = new InicioFragment();
+    private WifiFragment wifiFragment = new WifiFragment();
+
+    private  List<AuthUI.IdpConfig> providers = Arrays.asList(
+            new AuthUI.IdpConfig.EmailBuilder().build(),
+            new AuthUI.IdpConfig.PhoneBuilder().build(),
+            new AuthUI.IdpConfig.FacebookBuilder().build());
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -49,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        open_fragment(true, inicioFragment);
 
         settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
@@ -77,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }).check();
 
-
         BubbleNavigationConstraintView bubbleNavigation = findViewById(R.id.nav);
 
 
@@ -86,10 +99,11 @@ public class MainActivity extends AppCompatActivity {
             switch (position){
 
                 case 0:
+                    open_fragment(false, wifiFragment);
                     break;
 
                 case 1:
-                    //Toast.makeText(this, "pos "+String.valueOf(position), Toast.LENGTH_LONG).show();
+                    open_fragment(false, inicioFragment);
                     break;
 
                 case 2:
@@ -110,10 +124,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.user_profile, menu);
+        this.menu = menu;
 
         return true;
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.user = this.mAuth.getCurrentUser();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -122,26 +142,43 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id){
 
-            case R.id.login:
+            case R.id.profile:
 
-                // Choose authentication providers
-                List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.EmailBuilder().build(),
-                        new AuthUI.IdpConfig.PhoneBuilder().build());
+                if(this.user == null){
 
-// Create and launch sign-in intent
-                startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .build(),
-                        RC_SIGN_IN);
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setAvailableProviders(providers)
+                                    .build(),
+                            RC_SIGN_IN);
+
+                }else {
+
+                    Intent intent =  new Intent(this, Perfil.class);
+                    startActivity(intent);
+
+                }
 
                 break;
 
         }
 
         return true;
+    }
+
+    void open_fragment(boolean add, Fragment fragment){
+
+        if(add){
+
+            getSupportFragmentManager().beginTransaction().add(R.id.content_main, fragment).commit();
+
+        }else{
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+
+        }
+
     }
 
 
@@ -155,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 this.user = FirebaseAuth.getInstance().getCurrentUser();
+                //this.menu.getItem(1).setVisible(true);
                 // ...
             } else {
                 // Sign in failed. If response is null the user canceled the
